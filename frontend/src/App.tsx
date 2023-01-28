@@ -1,5 +1,6 @@
 import BattlePass from "./components/bp/BattlePass";
 import ChallengeContainer from "./components/challenges/ChallengeContainer";
+import ApiIntegration from "./components/apiIntegration";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="flex items-center justify-center w-full my-4">
         <BattlePass />
       </div>
+        <ApiIntegration />
     </div>
   );
 }

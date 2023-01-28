@@ -10,7 +10,9 @@ export default function ChallengeContainer( {challenges}: ChallengeContainerProp
       <div className="w-[30rem] border border-black rounded">
         <div className="flex flex-col h-full">
           {challenges.map( (challenge) =>
-            <DisplayChallenge description={challenge.description} xp={100} />
+              <div key={challenge.id}>
+                <DisplayChallenge description={challenge.description} xp={100} />
+              </div>
           )}
         </div>
       </div>

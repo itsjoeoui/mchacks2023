@@ -23,7 +23,6 @@ export default function apiIntegration () {
             setUsers(data)
         })
     }, [])
-
    return (
        <div>
            <ChallengeContainer challenges={challenge} />
