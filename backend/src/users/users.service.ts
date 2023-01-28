@@ -12,22 +12,33 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
+  private readonly users: Partial<User>[] = [
+    {
+      id: 1,
+      email: 'joey@itsjoeoui.com',
+      name: 'Joey',
+      coin: 23,
+    },
+  ];
+
   create(createUserDto: CreateUserDto) {
     const user: User = new User();
     user.email = createUserDto.email;
     user.name = createUserDto.name;
     user.password = createUserDto.password;
     user.coin = 0;
-    // user.bp = 
+    // user.bp =
     return user;
   }
 
   findAll() {
-    return this.usersRepository.find();
+    return this.users;
+    // return this.usersRepository.find();
   }
 
   findOne(id: number) {
-    return this.usersRepository.findOneBy({ id: id });
+    return this.users.find((user) => user.id === id);
+    // return this.usersRepository.findOneBy({ id: id });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
