@@ -1,24 +1,24 @@
 import {
   Controller,
   Get,
-  Post,
+  // Post,
   Body,
   Patch,
   Param,
-  Delete,
+  // Delete,
 } from '@nestjs/common';
 import { BpService } from './bp.service';
-import { CreateBpDto } from './dto/create-bp.dto';
+// import { CreateBpDto } from './dto/create-bp.dto';
 import { UpdateBpDto } from './dto/update-bp.dto';
 
 @Controller('bp')
 export class BpController {
   constructor(private readonly bpService: BpService) {}
 
-  @Post()
-  create(@Body() createBpDto: CreateBpDto) {
-    return this.bpService.create(createBpDto);
-  }
+  // @Post()
+  // create(@Body() createBpDto: CreateBpDto) {
+  //   return this.bpService.create(createBpDto);
+  // }
 
   @Get()
   findAll() {
@@ -35,8 +35,8 @@ export class BpController {
     return this.bpService.update(+id, updateBpDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.bpService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.bpService.remove(+id);
+  // }
 }
