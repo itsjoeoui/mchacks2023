@@ -1,6 +1,14 @@
 import { Bp } from 'src/bp/entities/bp.entity';
-import { Column, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  // JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,9 +22,12 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: 0 })
   coin: number;
 
-  @OneToOne(() => Bp, (bp) => bp.user)
+  @OneToOne(() => Bp, {
+    cascade: true,
+  })
+  @JoinColumn()
   bp: Bp;
 }

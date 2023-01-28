@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { BpService } from 'src/bp/bp.service';
+import { Bp } from 'src/bp/entities/bp.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+BpService;
 
 @Injectable()
 export class UsersService {
@@ -12,29 +15,64 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
+    const bp: Bp = new Bp();
     const user: User = new User();
     user.email = createUserDto.email;
     user.name = createUserDto.name;
     user.password = createUserDto.password;
-    user.coin = 0;
-    // user.bp = 
-    return user;
+    user.bp = bp;
+
+    return await this.usersRepository.save(user);
   }
 
-  findAll() {
-    return this.usersRepository.find();
+  async findAll() {
+    return await this.usersRepository.find();
   }
 
-  findOne(id: number) {
-    return this.usersRepository.findOneBy({ id: id });
+  async findOne(id: number) {
+    return await this.usersRepository.find({
+      relations: {
+        bp: true,
+      },
+      where: {
+        id: id,
+      },
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.usersRepository.findOneBy({
+      id: id,
+    });
+    if (!user) {
+      throw new NotFoundException(id);
+    }
+    if (updateUserDto.coin !== undefined) {
+      user.coin = updateUserDto.coin;
+    }
+    if (updateUserDto.email !== undefined) {
+      user.email = updateUserDto.email;
+    }
+    if (updateUserDto.name !== undefined) {
+      user.name = updateUserDto.name;
+    }
+    if (updateUserDto.password !== undefined) {
+      user.password = updateUserDto.password;
+    }
+    return await this.usersRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const user = await this.usersRepository.findOneBy({
+      id: id,
+    });
+
+    if (!user) {
+      throw new NotFoundException(id);
+    }
+
+    await this.usersRepository.delete(user);
+    return true;
   }
 }

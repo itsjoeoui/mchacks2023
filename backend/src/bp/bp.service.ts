@@ -1,26 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { CreateBpDto } from './dto/create-bp.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { UpdateBpDto } from './dto/update-bp.dto';
+import { Bp } from './entities/bp.entity';
 
 @Injectable()
 export class BpService {
-  create(createBpDto: CreateBpDto) {
-    return 'This action adds a new bp';
+  constructor(
+    @InjectRepository(Bp)
+    private pbRepository: Repository<Bp>,
+  ) {}
+
+  async findAll() {
+    return await this.pbRepository.find();
   }
 
-  findAll() {
-    return `This action returns all bp`;
+  async findOne(id: number) {
+    return await this.pbRepository.findOneBy({ id: id });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} bp`;
+  async update(id: number, updateBpDto: UpdateBpDto) {
+    const bp: Bp = await this.pbRepository.findOneBy({ id: id });
+    bp.exp = updateBpDto.exp;
+    return await this.pbRepository.save(bp);
   }
 
-  update(id: number, updateBpDto: UpdateBpDto) {
-    return `This action updates a #${id} bp`;
-  }
+  async remove(id: number) {
+    const user = await this.pbRepository.findOneBy({
+      id: id,
+    });
 
-  remove(id: number) {
-    return `This action removes a #${id} bp`;
+    if (!user) {
+      throw new NotFoundException(id);
+    }
+
+    await this.pbRepository.delete(user);
+    return true;
   }
 }

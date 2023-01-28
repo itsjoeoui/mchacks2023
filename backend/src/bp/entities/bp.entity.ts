@@ -1,13 +1,10 @@
-import { User } from 'src/users/entities/user.entity';
-import { Column, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Bp {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: 0 })
   exp: number;
-
-  @OneToOne(() => User, (user) => user.bp)
-  user: User;
 }
