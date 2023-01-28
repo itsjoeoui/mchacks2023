@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-function UserService(){
-    const baseUrl = 'http://localhost:3000'
+export default function UserService(){
+    const baseUrl = 'http://164.90.130.176:3000/'
     const [user, setUser] = useState<string>('')
     useEffect(() => {
         axios.get(baseUrl).then(response => {
-            console.log('request filled')
+            console.log(response.data)
             setUser(response.data)
         }).catch(error => {
             console.log(error)
