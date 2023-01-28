@@ -17,24 +17,21 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const bp: Bp = new Bp();
-
     const user: User = new User();
     user.email = createUserDto.email;
     user.name = createUserDto.name;
     user.password = createUserDto.password;
     user.bp = bp;
 
-    const rtn = await this.usersRepository.save(user);
-
-    return rtn;
+    return await this.usersRepository.save(user);
   }
 
-  // findAll() {
-  //   return this.usersRepository.find();
-  // }
+  async findAll() {
+    return await this.usersRepository.find();
+  }
 
-  findOne(id: number) {
-    return this.usersRepository.find({
+  async findOne(id: number) {
+    return await this.usersRepository.find({
       relations: {
         bp: true,
       },
@@ -63,10 +60,19 @@ export class UsersService {
     if (updateUserDto.password !== undefined) {
       user.password = updateUserDto.password;
     }
-    return this.usersRepository.save(user);
+    return await this.usersRepository.save(user);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const user = await this.usersRepository.findOneBy({
+      id: id,
+    });
+
+    if (!user) {
+      throw new NotFoundException(id);
+    }
+
+    await this.usersRepository.delete(user);
+    return true;
   }
 }
