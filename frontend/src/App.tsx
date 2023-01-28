@@ -1,12 +1,19 @@
 import BattlePass from "./components/bp/BattlePass";
+import ChallengeContainer from "./components/challenges/ChallengeContainer";
 
 function App() {
   return (
-    <div>
-      <div className="font-serif text-6xl">Radish</div>
-      <div className="flex h-screen items-center justify-center">
+    <div className="p-8">
+      {/* <div className="font-serif text-6xl">Radish</div> */}
+      <img
+        src="https://radish.coop/assets/images/radish-logos/Radish-Logo-BlackText-Large.png"
+        alt="Radish"
+        width={175}
+      />
+      <div className="flex items-center justify-center overflow-x-scroll min-w-[400px]">
         <BattlePass />
       </div>
+      <ChallengeContainer />
     </div>
   );
 }

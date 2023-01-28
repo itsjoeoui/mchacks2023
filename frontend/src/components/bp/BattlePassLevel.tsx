@@ -7,7 +7,7 @@ type BattlePassLevelProps = {
 
 export default function BattlePassLevel({ level }: BattlePassLevelProps) {
   return (
-    <div className="shadow-[0_0_0_3px_white] lg:shadow-[0_0_0_5px_white]">
+    <div>
       <div className="w-10 h-10 md:w-15 md:h-15 lg:w-20 lg:h-20 border-2 border-black bg-white flex justify-center items-center">
         <FiTag size={30} />
       </div>
