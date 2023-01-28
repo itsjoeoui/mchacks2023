@@ -2,30 +2,27 @@ import React, {useEffect, useState} from "react";
 import UserService from "./UserService";
 import BattlePass from "./bp/BattlePass";
 import ChallengeContainer from "./challenges/ChallengeContainer";
+import {Challenge} from "./UserService";
+import {Bp} from "./UserService";
+import {Users} from "./UserService";
+
+
 export default function apiIntegration () {
-    const [challenge, setChallenge] = useState<any>([])
-    const [bp, setBp] = useState<any>([])
-    const [users, setUsers] = useState<any>([])
-
+    const [challenge, setChallenge] = useState<Challenge[]>([])
+    const [bp, setBp] = useState<Bp[]>([])
+    const [users, setUsers] = useState<Users[]>([])
     useEffect(() => {
-        UserService
-            .getAll('challenges')
-            .then(initialChallenges => {
-                setChallenge(initialChallenges)
-            })
+        UserService.Challenges.list().then((data) => {
+            setChallenge(data)
+        })
 
-        UserService
-            .getAll('bp')
-            .then(initalBp => {
-                setBp(initalBp)
-            })
+        UserService.Bp.list().then((data) => [
+            setBp(data)
+        ])
 
-       UserService
-           .getAll('users')
-           .then(initalUsers => {
-               setUsers(initalUsers)
-           })
-
+        UserService.Users.list().then((data) => {
+            setUsers(data)
+        })
     }, [])
 
    return (
