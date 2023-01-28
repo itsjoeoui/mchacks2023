@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { BpModule } from './bp/bp.module';
 import { ChallengeModule } from './challenge/challenge.module';
+import { ConfigModule } from './config/config.module';
+import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { ChallengeModule } from './challenge/challenge.module';
     UsersModule,
     BpModule,
     ChallengeModule,
+    ConfigModule,
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
