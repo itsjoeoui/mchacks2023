@@ -6,7 +6,6 @@ import {Challenge} from "./UserService";
 import {Bp} from "./UserService";
 import {Users} from "./UserService";
 
-
 export default function apiIntegration () {
     const [challenge, setChallenge] = useState<Challenge[]>([])
     const [bp, setBp] = useState<Bp[]>([])
@@ -27,8 +26,7 @@ export default function apiIntegration () {
 
    return (
        <div>
-           <BattlePass />
-           <ChallengeContainer />
+           <ChallengeContainer challenges={challenge} />
        </div>
     )
 }

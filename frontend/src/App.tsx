@@ -13,7 +13,7 @@ function App() {
       <div className="flex items-center justify-center w-full my-4">
         <BattlePass />
       </div>
-      <ChallengeContainer />
+        <ChallengeContainer />
     </div>
   );
 }
