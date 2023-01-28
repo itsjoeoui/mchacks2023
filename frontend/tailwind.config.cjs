@@ -3,6 +3,10 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    fontFamily: {
+      sans: ["Raleway"],
+      serif: ['"DM Serif Display"'],
+    },
   },
   plugins: [],
 };
