@@ -5,7 +5,7 @@ import { Challenge } from './entities/challenge.entity';
 
 @Injectable()
 export class ChallengeService {
-  private readonly challenge: Challenge[] = [
+  private challenges: Challenge[] = [
     {
       id: 1,
       name: 'Sushi Sama',
@@ -34,26 +34,40 @@ export class ChallengeService {
 
   create(createChallengeDto: CreateChallengeDto) {
     // const challenge: Challenge = new Challenge();
-    return 'This action adds a new challenge';
+    const challenge: Challenge = new Challenge();
+    challenge.id = this.challenges.length + 1;
+    challenge.name = createChallengeDto.name;
+    challenge.description = createChallengeDto.description;
+    challenge.image = createChallengeDto.image;
+    challenge.completed = false;
+    this.challenges.push(challenge);
+    return challenge;
   }
 
   findAll() {
-    return this.challenge;
+    return this.challenges;
   }
 
   findOne(id: number) {
-    return this.challenge.find((challenge) => challenge.id === id);
+    return this.challenges.find((challenge) => challenge.id === id);
   }
 
   update(id: number, updateChallengeDto: UpdateChallengeDto) {
-    const challenge: Challenge = this.challenge.find(
+    const challenge: Challenge = this.challenges.find(
       (challenge) => challenge.id === id,
     );
-    challenge.completed = updateChallengeDto.completed;
+    if (updateChallengeDto.completed !== undefined) {
+      challenge.completed = updateChallengeDto.completed;
+      // if (updateChallengeDto.completed === true) {
+      // } else {
+      // }
+    }
+
     return challenge;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} challenge`;
+    this.challenges = this.challenges.filter((c) => c.id != id);
+    return true;
   }
 }
