@@ -1,21 +1,14 @@
+import Challenge from "./Challenge";
+
 export default function ChallengeContainer() {
   return (
     <div>
-      <h1 className="text-2xl font-serif">Weekly Challenges</h1>
-      <div className="w-[30rem] h-96 border-2 border-black rounded">
-        <div className="border border-black flex flex-col h-full">
-          <div className="border border-black flex-1">
-            Order something at ...
-          </div>
-          <div className="border border-black flex-1">
-            Order something at ...
-          </div>
-          <div className="border border-black flex-1">
-            Order something at ...
-          </div>
-          <div className="border border-black flex-1">
-            Order something at ...
-          </div>
+      <h2 className="text-2xl font-serif mb-2">Weekly Challenges</h2>
+      <div className="w-[30rem] border-2 border-black rounded">
+        <div className="flex flex-col h-full">
+          {[0, 1, 2].map((x) => (
+            <Challenge description="Order something from ..." xp={100} />
+          ))}
         </div>
       </div>
     </div>
