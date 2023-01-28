@@ -15,5 +15,8 @@ export class Challenge {
   image: string;
 
   @Column()
+  exp: number;
+
+  @Column()
   completed: boolean;
 }
