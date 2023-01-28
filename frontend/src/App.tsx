@@ -10,7 +10,7 @@ function App() {
         alt="Radish"
         width={175}
       />
-      <div className="flex items-center justify-center overflow-x-scroll min-w-[400px]">
+      <div className="flex items-center justify-center w-full my-4">
         <BattlePass />
       </div>
       <ChallengeContainer />
