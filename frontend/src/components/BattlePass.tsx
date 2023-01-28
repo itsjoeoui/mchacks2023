@@ -3,6 +3,7 @@ import BattlePassLevel from "./BattlePassLevel";
 import ProgressBar from "./ProgressBar";
 
 export default function BattlePass() {
+
   return (
     <div className="relative w-full">
       <ProgressBar progress={75} />
