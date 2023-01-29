@@ -3,12 +3,17 @@ import { useState, useEffect } from "react";
 import UserService from "./UserService";
 import { User } from "./UserService";
 import { FiUser, FiDollarSign } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Menu() {
   const auth = useAuth();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>();
+
+  const handleClick = () => {
+      navigate('/')
+  }
 
   useEffect(() => {
     UserService.User.details(1).then((data) => {
@@ -22,6 +27,7 @@ export default function Menu() {
           src="https://radish.coop/assets/images/radish-logos/Radish-Logo-BlackText-Large.png"
           alt="Radish"
           className="w-[150px] h-fit"
+          onClick={handleClick}
         />
 
         <div className="flex items-center gap-4">
