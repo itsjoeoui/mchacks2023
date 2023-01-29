@@ -40,7 +40,7 @@ export class ChallengeService {
     if (updateChallengeDto.completed !== undefined) {
       challenge.completed = updateChallengeDto.completed;
     }
-    return this.challengeRepository.save(challenge);
+    return await this.challengeRepository.save(challenge);
   }
 
   async remove() {
