@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ["Raleway"],
+      sans: ["Poppins"],
       serif: ['"DM Serif Display"'],
     },
   },

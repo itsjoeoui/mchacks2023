@@ -14,15 +14,13 @@ export default function Menu() {
   })
 
   return (
-    <div className="mb-8 mt-4">
-      <div className="px-8 py-3 border-y border-black flex justify-between items-center">
+    <div className="mb-8 px-8">
+      <div className="py-5 pb-0 flex justify-between items-center">
         <img
           src="https://radish.coop/assets/images/radish-logos/Radish-Logo-BlackText-Large.png"
           alt="Radish"
           className="w-[150px] h-fit"
         />
-
-        <button>Order</button>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
@@ -35,7 +33,8 @@ export default function Menu() {
           </div>
         </div>
       </div>
-      <nav className="flex justify-evenly items-center border-b border-black py-1">
+
+      <nav className="flex justify-end gap-4 flex-row py-1 text-xl">
         <Link to="/restaurants" className="hover:opacity-70">
           Restaurants
         </Link>
