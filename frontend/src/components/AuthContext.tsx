@@ -6,11 +6,12 @@ export const authContext = React.createContext<User | undefined>(undefined);
 export const useAuth = () => React.useContext(authContext);
 
 export const AuthProvider = ({ children }: any) => {
-  const [user, setUser] = React.useState<User>();
+  //const [id, setId] = React.useState<number>(0)
+  const [user, setUser] = React.useState<User>()
   useEffect(() => {
-    UserService.User.details(3).then((data) => {
-      setUser(data);
-    });
+    UserService.User.details(1).then((data) => {
+      setUser(data)
+    })
   }, []);
 
   return <authContext.Provider value={user}>{children}</authContext.Provider>;
