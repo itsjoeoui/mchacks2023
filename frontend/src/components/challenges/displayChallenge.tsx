@@ -13,12 +13,7 @@ export default function DisplayChallenge({ challenge }: ChallengeProps) {
         <div className="font-bold">{challenge.exp}xp</div>
       </div>
 
-      <p>
-        {challenge.description}
-        {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ex
-        cumque voluptate eligendi unde beatae nesciunt laborum harum rem
-        similique quo sed nisi quae amet reiciendis eos, odio culpa natus? */}
-      </p>
+      <p>{challenge.description}</p>
     </div>
   );
 }

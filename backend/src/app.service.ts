@@ -19,18 +19,21 @@ const USER: CreateUserDto = {
 export const CHALLENGE: Partial<CreateChallengeDto>[] = [
   {
     name: 'Sushi Sama',
-    description: 'Buy 1 get 1 free',
+    description: 'Order a California Roll',
     exp: 100,
+    menuId: 1,
   },
   {
     name: 'Basha',
-    description: 'Spend $15, earn 100 Radish coins',
+    description: 'Order a Shawarma Beef Poutine',
     exp: 233,
+    menuId: 2,
   },
   {
     name: 'Thai Express',
-    description: 'Free item after spending 10$',
+    description: 'Order a General Thai Chicken with Cauliflower Rice',
     exp: 302,
+    menuId: 3,
   },
 ];
 
@@ -45,28 +48,10 @@ export class AppService {
   ) {}
   async fillDb(): Promise<boolean> {
     if (!FILLED) {
-      const user = await this.usersService.create(USER);
-
+      await this.usersService.create(USER);
       FILLED = true;
       return true;
     }
     return false;
-  }
-
-  async order(userId: number, orderId: number): Promise<boolean> {
-    const user = await this.usersService.findOne(userId);
-
-    const curLevel = Math.floor(user.bp.exp / 1000);
-    user.bp.exp += 100;
-    const newLevel = Math.floor(user.bp.exp / 1000);
-
-    for (let i = curLevel; i < newLevel; i++) {
-      const dto = new CreateItemDto();
-      dto.name = levels[i].name;
-      dto.rewardType = levels[i].rewardType;
-      dto.inventory = user.inventory;
-      await this.itemsService.create(dto);
-    }
-    return true;
   }
 }
