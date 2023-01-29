@@ -20,8 +20,14 @@ export default function BattlePassPage() {
   if (!user || !config) {
     content = <div>Loading...</div>;
   } else {
+    const remaining = 500 - (user.bp.exp % 500);
     content = (
       <>
+        <div className="flex justify-center">
+          <h1 className="text-2xl font-serif mx-auto">
+            {remaining != 0 ? remaining : 500}/500 exp to next
+          </h1>
+        </div>
         <div className="flex items-center justify-center w-full mb-6">
           <BattlePass
             userExp={user.bp.exp}

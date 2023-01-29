@@ -12,7 +12,7 @@ type BattlePassProps = {
 };
 function getLeft(focus: number) {
   const windowWidth = window.innerWidth;
-  const gapSize = windowWidth < 768 ? 96 : 192;
+  const gapSize = windowWidth < 768 ? 96 : 144;
   return (focus + 2) * gapSize;
 }
 
@@ -34,10 +34,14 @@ export default function BattlePass({
   const fillPercent = (userExp / totalExp) * 100;
 
   return (
-    <ScrollContainer className="w-[328rem] h-36" vertical={false} ref={ref}>
-      <div className="relative w-[328rem] mb-[26px] mt-16 lg:mb-[55px]">
+    <ScrollContainer
+      className="w-[164rem] md:w-[220rem] lg:w-[268rem] h-36"
+      vertical={false}
+      ref={ref}
+    >
+      <div className="relative w-[164rem] md:w-[220rem] lg:w-[268rem] mb-[26px] mt-16 lg:mb-[55px]">
         <ProgressBar progress={fillPercent} />
-        <div className="flex gap-24 md:gap-48 items-center absolute top-1/2 transform -translate-y-1/2 w-full">
+        <div className="flex gap-24 md:gap-36 items-center absolute top-1/2 transform -translate-y-1/2 w-full">
           {config.items.map((item, i) => (
             <BattlePassLevel
               key={i}
