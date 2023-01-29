@@ -35,18 +35,18 @@ export class ChallengeService {
     },
   ];
 
-  create(createChallengeDto: CreateChallengeDto) {
-    // const challenge: Challenge = new Challenge();
-    const challenge: Challenge = new Challenge();
-    challenge.id = this.challenges.length + 1;
-    challenge.name = createChallengeDto.name;
-    challenge.description = createChallengeDto.description;
-    challenge.image = createChallengeDto.image;
-    challenge.exp = createChallengeDto.exp;
-    challenge.completed = false;
-    this.challenges.push(challenge);
-    return challenge;
-  }
+  // create(createChallengeDto: CreateChallengeDto) {
+  //   // const challenge: Challenge = new Challenge();
+  //   const challenge: Challenge = new Challenge();
+  //   challenge.id = this.challenges.length + 1;
+  //   challenge.name = createChallengeDto.name;
+  //   challenge.description = createChallengeDto.description;
+  //   challenge.image = createChallengeDto.image;
+  //   challenge.exp = createChallengeDto.exp;
+  //   challenge.completed = false;
+  //   this.challenges.push(challenge);
+  //   return challenge;
+  // }
 
   findAll() {
     return this.challenges;
@@ -70,8 +70,8 @@ export class ChallengeService {
     return challenge;
   }
 
-  remove(id: number) {
-    this.challenges = this.challenges.filter((c) => c.id != id);
-    return true;
-  }
+  // remove(id: number) {
+  //   this.challenges = this.challenges.filter((c) => c.id != id);
+  //   return true;
+  // }
 }
