@@ -51,4 +51,4 @@ const User = {
   create: (data: User) => request.post<User>("/user", data),
 };
 
-export default { Challenges, Bp, User };
+export default { Challenges, Inventory, Bp, User };

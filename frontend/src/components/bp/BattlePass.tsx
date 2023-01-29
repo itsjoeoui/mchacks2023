@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import BattlePassLevel from "./BattlePassLevel";
 import ProgressBar from "./ProgressBar";
+import UserService, { User } from "../UserService";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { ScrollContainerProps } from "react-indiana-drag-scroll";
 
@@ -17,10 +18,15 @@ function getBarProgressPixel() {
 }
 
 export default function BattlePass() {
+  const [user, setUser] = useState<User>()
   const ref: any = useRef<ScrollContainer>(null);
   useEffect(() => {
     // const windowWidth = window.innerWidth;
     // const gapSize = windowWidth < 768 ? 96 : 192;
+    UserService.User.details().then( (data) => {
+      setUser(data)
+    })
+
     ref.current?.getElement().scrollTo({
       left: getLeft(),
     });
