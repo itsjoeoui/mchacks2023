@@ -1,16 +1,26 @@
 import { FiClock, FiMapPin } from "react-icons/fi";
+import UserService, {Inventory} from "../UserService";
 
 type RestaurantTileProps = {
   name: string;
   cuisine: string;
   description: string;
-};
+}
+
+const Handle_Clicked = (id : number) => {
+  UserService.Inventory.send(id)
+      .then((response) => {
+        if(response == id)
+          console.log('order succeeded! ')
+      })
+}
 
 export default function RestaurantTile({
   name,
   cuisine,
   description,
 }: RestaurantTileProps) {
+
   return (
     <a className="flex flex-col">
       <img
@@ -39,3 +49,4 @@ export default function RestaurantTile({
     </a>
   );
 }
+

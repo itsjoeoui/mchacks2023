@@ -21,6 +21,15 @@ export type Inventory = {
   name: string;
   itemType: string;
 }
+export type Item = {
+  name: string;
+  rewardType: number;
+}
+
+export type Config = {
+  maxExp : number;
+  items : Item[]
+}
 axios.defaults.baseURL = "https://bp.augustera.me/";
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -32,14 +41,16 @@ const request = {
 
 const Challenges = {
   list: () => request.get<Challenge[]>("/challenge"),
-  details: (id: string) => request.get<Challenge>(`/challenge/${id}`),
+  details: (id: number) => request.get<Challenge>(`/challenge/${id}`),
   create: (data: Challenge) => request.post<Challenge>("/challenge", data),
 };
 
 const Inventory = {
-  details: () => request.get<Inventory>("/inventory"),
-  create: (data: Inventory) => request.post<Inventory>("/Inventory", data)
-}
+  list: () => request.get<Inventory[]>("/inventory"),
+  details: (id: number) => request.get<Inventory>(`/inventory/${id}`),
+  create: (data: Inventory) => request.post<Inventory>('/inventory', data),
+  send: (id: number) => request.post<number>("/placeholder", id)
+};
 
 const Bp = {
   details: () => request.get<Bp>("/bp"),
@@ -51,4 +62,10 @@ const User = {
   create: (data: User) => request.post<User>("/user", data),
 };
 
-export default { Challenges, Inventory, Bp, User };
+const Config = {
+  details: () => request.get<User>("/config"),
+  create: (data: Config) => request.post<Config>("/config", data),
+};
+
+
+export default { Challenges, Inventory, Bp, User, Config};
