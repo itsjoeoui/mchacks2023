@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 
 export type Challenge = {
@@ -11,11 +10,17 @@ export type Challenge = {
 
 export type Bp = {
   id: number;
+  xp: number;
 };
 
 export type User = {
   id: number;
 };
+
+export type Inventory = {
+  name: string;
+  itemType: string;
+}
 axios.defaults.baseURL = "https://bp.augustera.me/";
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -30,6 +35,11 @@ const Challenges = {
   details: (id: string) => request.get<Challenge>(`/challenge/${id}`),
   create: (data: Challenge) => request.post<Challenge>("/challenge", data),
 };
+
+const Inventory = {
+  details: () => request.get<Inventory>("/inventory"),
+  create: (data: Inventory) => request.post<Inventory>("/Inventory", data)
+}
 
 const Bp = {
   details: () => request.get<Bp>("/bp"),
