@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiTag, FiCheckCircle } from "react-icons/fi";
+import { FiTag, FiCheckCircle} from "react-icons/fi";
 import { FaCoins, FaHamburger } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
