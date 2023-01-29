@@ -20,6 +20,7 @@ export class ChallengeService {
     challenge.name = createChallengeDto.name;
     challenge.description = createChallengeDto.description;
     challenge.exp = createChallengeDto.exp;
+    challenge.menuId = createChallengeDto.menuId;
     challenge.completed = false;
     return await this.challengeRepository.save(challenge);
   }

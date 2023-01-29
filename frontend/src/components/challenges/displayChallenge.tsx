@@ -1,11 +1,14 @@
 import React from "react";
 import { Challenge } from "../UserService";
-
+import { FiCheckSquare, FiSquare} from "react-icons/fi"
 type ChallengeProps = {
   challenge: Challenge;
 };
 
 export default function DisplayChallenge({ challenge }: ChallengeProps) {
+    let icon = <FiSquare size={30} />;
+    if(challenge.completed == true)
+        icon = <FiCheckSquare size={30} />;
   return (
     <div className="border-black flex-1 p-5 border-b last:border-b-0">
       <div className="flex justify-between mb-2">
@@ -13,12 +16,10 @@ export default function DisplayChallenge({ challenge }: ChallengeProps) {
         <div className="font-bold">{challenge.exp}xp</div>
       </div>
 
-      <p>
-        {challenge.description}
-        {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ex
-        cumque voluptate eligendi unde beatae nesciunt laborum harum rem
-        similique quo sed nisi quae amet reiciendis eos, odio culpa natus? */}
-      </p>
+        <div className="flex justify-between" >
+            <p>{challenge.description}</p>
+            {icon}
+        </div>
     </div>
   );
 }

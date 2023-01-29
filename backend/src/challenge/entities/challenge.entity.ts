@@ -26,6 +26,9 @@ export class Challenge {
   @Column()
   completed: boolean;
 
+  @Column()
+  menuId: number;
+
   @ManyToOne(() => User, (user) => user.challenges)
   user: User;
 }

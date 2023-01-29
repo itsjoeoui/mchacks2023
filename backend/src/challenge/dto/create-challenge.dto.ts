@@ -4,5 +4,6 @@ export class CreateChallengeDto {
   name: string;
   description: string;
   exp: number;
+  menuId: number;
   user: User;
 }

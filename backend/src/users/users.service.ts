@@ -10,14 +10,21 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { CHALLENGE } from '@shared/app.service';
-BpService;
+import { Challenge } from '@shared/challenge/entities/challenge.entity';
+import { CreateItemDto } from '@shared/items/dto/create-item.dto';
+import { config } from '@shared/config/config.controller';
+import { ItemsService } from '@shared/items/items.service';
+import { UpdateChallengeDto } from '@shared/challenge/dto/update-challenge.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    @InjectRepository(Challenge)
+    private challengeRepository: Repository<Challenge>,
     private challengeService: ChallengeService,
+    private itemsService: ItemsService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -44,7 +51,9 @@ export class UsersService {
   }
 
   async findAll() {
-    return await this.usersRepository.find();
+    return await this.usersRepository.find({
+      relations: ['bp', 'challenges', 'inventory'],
+    });
   }
 
   async findOne(id: number) {
@@ -78,6 +87,39 @@ export class UsersService {
     }
     if (updateUserDto.password !== undefined) {
       user.password = updateUserDto.password;
+    }
+    return await this.usersRepository.save(user);
+  }
+
+  async makeOrder(id: number, menuIds: number[]) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['bp', 'challenges', 'inventory'],
+    });
+
+    if (!user) {
+      throw new NotFoundException(id);
+    }
+
+    const curLevel = Math.floor(user.bp.exp / 1000);
+    user.bp.exp += 100;
+    for (const challenge of user.challenges) {
+      if (menuIds.find((id) => id === challenge.menuId)) {
+        const dto = new UpdateChallengeDto();
+        dto.completed = true;
+        user.bp.exp += challenge.exp;
+        await this.challengeService.update(challenge.id, dto);
+      }
+    }
+    const newLevel = Math.floor(user.bp.exp / 1000);
+    for (let i = curLevel; i < newLevel; i++) {
+      const dto = new CreateItemDto();
+      dto.name = config.items[i].name;
+      dto.rewardType = config.items[i].rewardType;
+      dto.inventory = user.inventory;
+      await this.itemsService.create(dto);
     }
     return await this.usersRepository.save(user);
   }
