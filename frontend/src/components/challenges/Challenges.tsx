@@ -9,7 +9,12 @@ export default function Challenges() {
     UserService.Challenges.list().then((data) => {
       setChallenges(data);
     });
-    }, []);
+  }, []);
+
+  if (!challenges) {
+    return <div>Loading...</div>;
+  }
+  console.log(challenges);
 
   return (
     <div>

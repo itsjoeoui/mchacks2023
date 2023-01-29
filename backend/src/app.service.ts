@@ -6,6 +6,9 @@ import { CreateChallengeDto } from './challenge/dto/create-challenge.dto';
 import { ChallengeService } from './challenge/challenge.service';
 import { levels } from './bp/bp.controller';
 import { CreateItemDto } from './items/dto/create-item.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './users/entities/user.entity';
+import { Repository } from 'typeorm';
 
 const USER: CreateUserDto = {
   name: 'JYU',
@@ -13,7 +16,7 @@ const USER: CreateUserDto = {
   email: 'someemail',
 };
 
-const CHALLENGE: Partial<CreateChallengeDto>[] = [
+export const CHALLENGE: Partial<CreateChallengeDto>[] = [
   {
     name: 'Sushi Sama',
     description: 'Buy 1 get 1 free',
@@ -43,10 +46,7 @@ export class AppService {
   async fillDb(): Promise<boolean> {
     if (!FILLED) {
       const user = await this.usersService.create(USER);
-      CHALLENGE.map((c) => {
-        c.user = user;
-        this.challengeService.create(c as CreateChallengeDto);
-      });
+
       FILLED = true;
       return true;
     }

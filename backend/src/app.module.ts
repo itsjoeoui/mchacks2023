@@ -8,6 +8,7 @@ import { ChallengeModule } from './challenge/challenge.module';
 import { ConfigModule } from './config/config.module';
 import { ItemsModule } from './items/items.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [

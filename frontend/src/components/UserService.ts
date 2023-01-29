@@ -20,18 +20,19 @@ export type User = {
 export type Inventory = {
   name: string;
   itemType: string;
-}
+};
+
 export type Item = {
   name: string;
   rewardType: number;
-}
+};
 
 export type Config = {
-  maxExp : number;
-  items : Item[]
-}
+  maxExp: number;
+  items: Item[];
+};
 
-axios.defaults.baseURL = "https://bp.augustera.me/";
+axios.defaults.baseURL = "http://localhost:3000"; // NOTE: FIX CORS
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
@@ -49,8 +50,8 @@ const Challenges = {
 const Inventory = {
   list: () => request.get<Inventory[]>("/inventory"),
   details: (id: number) => request.get<Inventory>(`/inventory/${id}`),
-  create: (data: Inventory) => request.post<Inventory>('/inventory', data),
-  send: (id: number) => request.post<number>("/placeholder", id)
+  create: (data: Inventory) => request.post<Inventory>("/inventory", data),
+  send: (id: number) => request.post<number>("/placeholder", id),
 };
 
 const Bp = {
@@ -68,5 +69,4 @@ const Config = {
   create: (data: Config) => request.post<Config>("/config", data),
 };
 
-
-export default { Challenges, Inventory, Bp, User, Config};
+export default { Challenges, Inventory, Bp, User, Config };

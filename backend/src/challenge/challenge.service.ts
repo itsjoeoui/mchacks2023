@@ -24,9 +24,9 @@ export class ChallengeService {
     return await this.challengeRepository.save(challenge);
   }
 
-  // async findAll() {
-  //   return await this.challengeRepository.find();
-  // }
+  async findAll() {
+    return await this.challengeRepository.find();
+  }
 
   async findOne(id: number) {
     return await this.challengeRepository.findOneBy({ id: id });
@@ -40,5 +40,13 @@ export class ChallengeService {
       challenge.completed = updateChallengeDto.completed;
     }
     return this.challengeRepository.save(challenge);
+  }
+
+  async remove() {
+    const challenges = await this.challengeRepository.find();
+
+    for (const challenge of challenges) {
+      await this.challengeRepository.delete(challenge.id);
+    }
   }
 }
