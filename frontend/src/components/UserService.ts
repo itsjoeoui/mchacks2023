@@ -16,6 +16,10 @@ export type Bp = {
 
 export type User = {
   id: number;
+  email: string;
+  name: string;
+  password: string;
+  coin: number;
   bp: Bp;
   inventory: Inventory;
   challenges: Challenge[];

@@ -7,8 +7,14 @@ import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Menu() {
-  const user = useAuth();
+  const auth= useAuth();
+  const [user, setUser] = useState<User>()
 
+  useEffect(() => {
+    UserService.User.details(3).then((data) => {
+      setUser(data)
+    })
+  }, [])
   return (
     <div className="mb-8 px-8">
       <div className="py-5 pb-0 flex justify-between items-center">
@@ -21,11 +27,11 @@ export default function Menu() {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <FiUser size={30} strokeWidth={1} />
-            <span>randomuser</span>
+            <span>{user?.name}</span>
           </div>
           <div className="flex items-center gap-1">
             <FiDollarSign size={30} strokeWidth={1} />
-            <span>5,000,000</span>
+            <span>{user?.coin}</span>
           </div>
         </div>
       </div>
