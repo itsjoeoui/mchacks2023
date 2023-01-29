@@ -1,6 +1,16 @@
+import React from 'react';
+import {useState, useEffect} from "react";
+import UserService from "./UserService";
+import {User} from "./UserService"
 import { FiUser, FiDollarSign } from "react-icons/fi";
 
 export default function Menu() {
+  const [user, setUser] = useState<User>()
+  useEffect(() => {
+    UserService.User.details().then((data) => {
+      setUser(data)
+    })
+  })
   return (
     <div className="mb-8 mt-4">
       <div className="px-8 py-3 border-y border-black flex justify-between items-center">

@@ -1,21 +1,21 @@
 import DisplayChallenge from "./displayChallenge";
-import UserService, { Bp, Challenge, Users } from "../UserService";
+import UserService, { Bp, Challenge, User } from "../UserService";
 import { useEffect, useState } from "react";
 
 export default function Challenges() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
-  const [bp, setBp] = useState<Bp[]>([]);
-  const [users, setUsers] = useState<Users[]>([]);
+  const [bp, setBp] = useState<Bp>();
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     UserService.Challenges.list().then((data) => {
       setChallenges(data);
     });
 
-    UserService.Bp.list().then((data) => [setBp(data)]);
+    UserService.Bp.details().then((data) => [setBp(data)]);
 
-    UserService.Users.list().then((data) => {
-      setUsers(data);
+    UserService.User.details().then((data) => {
+      setUser(data);
     });
   }, []);
 
