@@ -83,7 +83,7 @@ const Config = {
 };
 
 const Menu = {
-  order: (data: OrderItem[]) => request.post("/users/makeOrder", data.map((_) => _.menuId)),
+  order: (data: OrderItem[]) => request.post<OrderItem[]>("/users/makeOrder", data.map((_) => _.menuId)),
 }
 
 export default { Challenges, Inventory, Bp, User, Config, Menu };

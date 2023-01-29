@@ -12,7 +12,9 @@ export default function Challenges({ challenges }: ChallengesProps) {
       <h2 className="text-3xl font-serif mb-3">Weekly Challenges</h2>
       <div className="w-full border border-black rounded">
         <div className="flex flex-col h-full">
-          {challenges.map((challenge) => (
+          {challenges.sort(( chall1, chall2 ) => (
+              chall1.name.localeCompare(chall2.name)
+          )).map((challenge) => (
             <div key={challenge.id}>
               <DisplayChallenge challenge={challenge} />
             </div>
