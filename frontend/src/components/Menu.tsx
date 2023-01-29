@@ -8,17 +8,13 @@ import { useAuth } from "./AuthContext";
 
 export default function Menu() {
   const auth = useAuth();
-  const [user, setUser] = useState<User>()
-  const [id, setId] = useState<number>(1)
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    UserService.User.details(id).then((data) => {
-      setUser(data)
-    })
-    if(user?.name == null)
-      setId(id + 1)
-    console.log(id)
-  }, [])
+    UserService.User.details(1).then((data) => {
+      setUser(data);
+    });
+  }, []);
   return (
     <div className="mb-8 px-8">
       <div className="py-5 pb-0 flex justify-between items-center">
