@@ -1,4 +1,5 @@
 import { FiUser, FiDollarSign } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
@@ -22,8 +23,8 @@ export default function Menu() {
         </div>
       </div>
       <nav className="flex justify-evenly items-center border-b border-black py-1">
-        <a>Restaurants</a>
-        <a>Battle Pass</a>
+        <Link to="/restaurants">Restaurants</Link>
+        <Link to="/">Battle Pass</Link>
       </nav>
     </div>
   );
