@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Inventory } from '@shared/inventory/entities/inventory.entity';
 import { BpService } from 'src/bp/bp.service';
 import { Bp } from 'src/bp/entities/bp.entity';
 import { Repository } from 'typeorm';
@@ -16,22 +17,24 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const bp: Bp = new Bp();
-    const user: User = new User();
+    const bp = new Bp();
+    const inventory = new Inventory();
+    const user = new User();
     user.email = createUserDto.email;
     user.name = createUserDto.name;
     user.password = createUserDto.password;
     user.bp = bp;
+    user.inventory = inventory;
 
     return await this.usersRepository.save(user);
   }
 
-  async findAll() {
-    return await this.usersRepository.find();
-  }
+  // async findAll() {
+  //   return await this.usersRepository.find();
+  // }
 
   async findOne(id: number) {
-    return await this.usersRepository.find({
+    return await this.usersRepository.findOne({
       relations: {
         bp: true,
       },
@@ -63,16 +66,16 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  async remove(id: number) {
-    const user = await this.usersRepository.findOneBy({
-      id: id,
-    });
+  // async remove(id: number) {
+  //   const user = await this.usersRepository.findOneBy({
+  //     id: id,
+  //   });
 
-    if (!user) {
-      throw new NotFoundException(id);
-    }
+  //   if (!user) {
+  //     throw new NotFoundException(id);
+  //   }
 
-    await this.usersRepository.delete(user);
-    return true;
-  }
+  //   await this.usersRepository.delete(user);
+  //   return true;
+  // }
 }

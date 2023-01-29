@@ -1,7 +1,18 @@
+import React from 'react';
+import {useState, useEffect} from "react";
+import UserService from "./UserService";
+import {User} from "./UserService"
 import { FiUser, FiDollarSign } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 export default function Menu() {
+  const [user, setUser] = useState<User>()
+  useEffect(() => {
+    UserService.User.details().then((data) => {
+      setUser(data)
+    })
+  })
+
   return (
     <div className="mb-8 px-8">
       <div className="py-5 pb-0 flex justify-between items-center">

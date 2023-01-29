@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '@shared/users/entities/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Challenge {
@@ -12,11 +13,11 @@ export class Challenge {
   description: string;
 
   @Column()
-  image: string;
-
-  @Column()
   exp: number;
 
   @Column()
   completed: boolean;
+
+  @ManyToOne(() => User, (user) => user.challenges)
+  user: User;
 }

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 
 export type Challenge = {
@@ -11,11 +10,17 @@ export type Challenge = {
 
 export type Bp = {
   id: number;
+  xp: number;
 };
 
-export type Users = {
+export type User = {
   id: number;
 };
+
+export type Inventory = {
+  name: string;
+  itemType: string;
+}
 axios.defaults.baseURL = "https://bp.augustera.me/";
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -31,16 +36,19 @@ const Challenges = {
   create: (data: Challenge) => request.post<Challenge>("/challenge", data),
 };
 
+const Inventory = {
+  details: () => request.get<Inventory>("/inventory"),
+  create: (data: Inventory) => request.post<Inventory>("/Inventory", data)
+}
+
 const Bp = {
-  list: () => request.get<Bp[]>("/bp"),
-  details: (id: string) => request.get<Bp>(`/bp/${id}`),
+  details: () => request.get<Bp>("/bp"),
   create: (data: Bp) => request.post<Bp>("/bp", data),
 };
 
-const Users = {
-  list: () => request.get<Users[]>("/users"),
-  details: (id: string) => request.get<Users>(`/users/${id}`),
-  create: (data: Challenge) => request.post<Users>("/users", data),
+const User = {
+  details: () => request.get<User>("/user"),
+  create: (data: User) => request.post<User>("/user", data),
 };
 
-export default { Challenges, Bp, Users };
+export default { Challenges, Bp, User };

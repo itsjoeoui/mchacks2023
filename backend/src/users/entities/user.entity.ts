@@ -1,9 +1,11 @@
+import { Challenge } from '@shared/challenge/entities/challenge.entity';
 import { Bp } from 'src/bp/entities/bp.entity';
+import { Inventory } from '@shared/inventory/entities/inventory.entity';
 import {
   Column,
   Entity,
   JoinColumn,
-  // JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -30,4 +32,13 @@ export class User {
   })
   @JoinColumn()
   bp: Bp;
+
+  @OneToOne(() => Inventory, {
+    cascade: true,
+  })
+  @JoinColumn()
+  inventory: Inventory;
+
+  @OneToMany(() => Challenge, (challenge) => challenge.user)
+  challenges: Challenge[];
 }

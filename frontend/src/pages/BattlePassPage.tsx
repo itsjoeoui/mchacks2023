@@ -3,6 +3,7 @@ import Challenges from "../components/challenges/Challenges";
 import Menu from "../components/Menu";
 import Layout from "../Layout";
 
+
 export default function BattlePassPage() {
   return (
     <Layout>
