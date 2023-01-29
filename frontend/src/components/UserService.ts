@@ -36,7 +36,7 @@ export type Config = {
   items: Item[];
 };
 
-axios.defaults.baseURL = "http://localhost:3000"; // NOTE: FIX CORS
+axios.defaults.baseURL = "https://bp.augustera.me"; // NOTE: FIX CORS
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
