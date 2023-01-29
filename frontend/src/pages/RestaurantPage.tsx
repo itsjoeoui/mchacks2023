@@ -39,7 +39,7 @@ export default function RestaurantPage() {
 
                 <FiPlus
                   size={30}
-                  className="float-right mt-4"
+                  className="float-right mt-4 hover:bg-gray-200 rounded-md transition duration-150 p-1 cursor-pointer"
                   onClick={() =>
                     setOrders([
                       ...(orders || []),
