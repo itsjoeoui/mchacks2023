@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import BattlePassLevel from "./BattlePassLevel";
 import ProgressBar from "./ProgressBar";
+import ScrollContainer from "react-indiana-drag-scroll";
+import { ScrollContainerProps } from "react-indiana-drag-scroll";
+
+function getLeft() {
+  const windowWidth = window.innerWidth;
+  const gapSize = windowWidth < 768 ? 96 : 192;
+  return 3 * gapSize;
+}
+
+function getBarProgressPixel() {
+  const windowWidth = window.innerWidth;
+  const gapSize = windowWidth < 768 ? 96 : 192;
+  return 4.5 * gapSize;
+}
 
 export default function BattlePass() {
+  const ref: any = useRef<ScrollContainer>(null);
+  useEffect(() => {
+    // const windowWidth = window.innerWidth;
+    // const gapSize = windowWidth < 768 ? 96 : 192;
+    ref.current?.getElement().scrollTo({
+      left: getLeft(),
+    });
+  }, []);
+
   return (
-    <div className="relative w-full mb-[26px] mt-[26px] lg:mb-[43px] lg:mt-[43px]">
-      <ProgressBar progress={75} />
-      <div className="flex justify-around items-center absolute top-1/2 transform -translate-y-1/2 w-full">
-        {[true, true, true, true, false].map((x, i) => (
-          <BattlePassLevel key={i} level={i + 1} completed={x} />
-        ))}
+    <ScrollContainer className="w-[300rem] h-36" vertical={false} ref={ref}>
+      <div className="relative w-[300rem] mb-[26px] mt-16 lg:mb-[55px]">
+        <ProgressBar progress={getBarProgressPixel()} />
+        <div className="flex gap-24 md:gap-48 items-center absolute top-1/2 transform -translate-y-1/2 w-full">
+          {[true, true, true, true, false].map((x, i) => (
+            <BattlePassLevel key={i} level={i + 1} completed={x} />
+          ))}
+        </div>
       </div>
-    </div>
+    </ScrollContainer>
   );
 }

@@ -1,19 +1,20 @@
+import Menu from "./components/Menu";
 import BattlePass from "./components/bp/BattlePass";
 import ChallengeContainer from "./components/challenges/ChallengeContainer";
 
 function App() {
   return (
-    <div className="p-8">
+    <div>
       {/* <div className="font-serif text-6xl">Radish</div> */}
-      <img
-        src="https://radish.coop/assets/images/radish-logos/Radish-Logo-BlackText-Large.png"
-        alt="Radish"
-        width={175}
-      />
-      <div className="flex items-center justify-center w-full my-4">
-        <BattlePass />
-      </div>
-      <ChallengeContainer />
+      <Menu />
+      <main className="px-8">
+        <div className="flex items-center justify-center w-full mb-6">
+          <BattlePass />
+        </div>
+        <div className="flex justify-center md:w-3/5 mx-auto">
+          <ChallengeContainer />
+        </div>
+      </main>
     </div>
   );
 }
