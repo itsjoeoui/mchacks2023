@@ -2,6 +2,7 @@ import BattlePass from "../components/bp/BattlePass";
 import Challenges from "../components/challenges/Challenges";
 import Menu from "../components/Menu";
 
+
 export default function BattlePassPage() {
   return (
     <div>
