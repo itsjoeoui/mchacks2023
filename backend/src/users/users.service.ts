@@ -15,6 +15,7 @@ import { CreateItemDto } from '@shared/items/dto/create-item.dto';
 import { config } from '@shared/config/config.controller';
 import { ItemsService } from '@shared/items/items.service';
 import { UpdateChallengeDto } from '@shared/challenge/dto/update-challenge.dto';
+import { RewardType } from '@shared/items/entities/item.entity';
 
 @Injectable()
 export class UsersService {
@@ -113,8 +114,8 @@ export class UsersService {
       throw new NotFoundException(id);
     }
 
-    const curLevel = Math.floor(user.bp.exp / 1000);
-    user.bp.exp += 100;
+    const curLevel = Math.floor(user.bp.exp / 500);
+    user.bp.exp += 100 * menuIds.length;
     for (let i = 0; i < user.challenges.length; i++) {
       const challenge = user.challenges[i];
       if (
@@ -130,14 +131,18 @@ export class UsersService {
       }
     }
 
-    const newLevel = Math.floor(user.bp.exp / 1000);
+    const newLevel = Math.floor(user.bp.exp / 500);
 
     for (let i = curLevel; i < newLevel; i++) {
-      const dto = new CreateItemDto();
-      dto.name = config.items[i].name;
-      dto.rewardType = config.items[i].rewardType;
-      dto.inventory = inventory;
-      inventory.items.push(await this.itemsService.create(dto));
+      if (config.items[i].rewardType === RewardType.Coin) {
+        user.coin += 100;
+      } else {
+        const dto = new CreateItemDto();
+        dto.name = config.items[i].name;
+        dto.rewardType = config.items[i].rewardType;
+        dto.inventory = inventory;
+        inventory.items.push(await this.itemsService.create(dto));
+      }
     }
 
     return await this.usersRepository.save(user);
