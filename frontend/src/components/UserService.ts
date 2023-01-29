@@ -6,11 +6,12 @@ export type Challenge = {
   description: string;
   image: string;
   completed: boolean;
+  exp: number;
 };
 
 export type Bp = {
   id: number;
-  xp: number;
+  exp: number;
 };
 
 export type User = {

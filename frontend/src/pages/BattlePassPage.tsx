@@ -7,7 +7,7 @@ import Layout from "../Layout";
 import { useAuth } from "../components/AuthContext";
 
 export default function BattlePassPage() {
-  const [config, setConfig] = useState<Config>({ maxExp: 10000, items: [] });
+  const [config, setConfig] = useState<Config>();
   const user = useAuth();
 
   useEffect(() => {
@@ -17,13 +17,17 @@ export default function BattlePassPage() {
   }, []);
 
   let content;
-  if (!user) {
+  if (!user || !config) {
     content = <div>Loading...</div>;
   } else {
     content = (
       <>
         <div className="flex items-center justify-center w-full mb-6">
-          <BattlePass userExp={user.bp.xp} totalExp={config.maxExp} />
+          <BattlePass
+            userExp={user.bp.exp}
+            totalExp={config.maxExp}
+            config={config}
+          />
         </div>
         <div className="flex justify-center md:w-3/5 mx-auto">
           <Challenges challenges={user.challenges} />

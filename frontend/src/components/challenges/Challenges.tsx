@@ -14,7 +14,7 @@ export default function Challenges({ challenges }: ChallengesProps) {
         <div className="flex flex-col h-full">
           {challenges.map((challenge) => (
             <div key={challenge.id}>
-              <DisplayChallenge description={challenge.description} xp={100} />
+              <DisplayChallenge challenge={challenge} />
             </div>
           ))}
         </div>
