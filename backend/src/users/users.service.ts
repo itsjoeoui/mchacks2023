@@ -37,6 +37,8 @@ export class UsersService {
     return await this.usersRepository.findOne({
       relations: {
         bp: true,
+        challenges: true,
+        inventory: true,
       },
       where: {
         id: id,
