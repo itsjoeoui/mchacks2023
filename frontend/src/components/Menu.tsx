@@ -11,6 +11,8 @@ export default function Menu() {
           className="w-[150px] h-fit"
         />
 
+        <button>Order</button>
+
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <FiUser size={30} strokeWidth={1} />

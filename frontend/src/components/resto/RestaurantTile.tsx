@@ -20,22 +20,17 @@ export default function RestaurantTile({
       />
 
       <div>
-        <h2 className="font-serif text-3xl mt-2">Restaurant Name</h2>
-        <h3 className="font-sans text-xl mb-2">Cuisine</h3>
+        <h2 className="font-serif text-3xl mt-2">{name}</h2>
+        <h3 className="font-sans text-xl mb-2">{cuisine}</h3>
 
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-          pariatur. Quae sequi fugit nostrum ratione impedit ad veritatis
-          eveniet iste quo quis temporibus rerum, voluptate fuga sit dolores
-          quasi molestiae.
-        </p>
+        <p>{description}</p>
 
-        <div>
-          <div>
+        <div className="flex flex-row justify-around items-center mt-2">
+          <div className="flex flex-row gap-2 items-center">
             <FiClock />
             <span>30-35 mins.</span>
           </div>
-          <div>
+          <div className="flex flex-row gap-2 items-center">
             <FiMapPin />
             <span>Somewhere in Montreal</span>
           </div>
