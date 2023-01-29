@@ -1,10 +1,12 @@
 import Layout from "../Layout";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import UserService, { OrderItem } from "../components/UserService";
+import UserService, { OrderItem, User } from "../components/UserService";
+import { useAuth } from "../components/AuthContext";
 
 export default function RestaurantPage() {
   let { id } = useParams();
+  const auth = useAuth();
 
   const [orders, setOrders] = useState<OrderItem[]>();
 
@@ -63,7 +65,9 @@ export default function RestaurantPage() {
                 ))}
               </div>
 
-              <button onClick={() => UserService.Menu.order(orders)}>
+              <button
+                onClick={() => UserService.Menu.order(auth as User, orders)}
+              >
                 Order
               </button>
             </div>
