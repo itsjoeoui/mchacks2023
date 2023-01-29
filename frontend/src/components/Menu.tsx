@@ -15,7 +15,7 @@ export default function Menu() {
       setUser(data);
     });
   }, []);
-  return (
+ return (
     <div className="mb-8 px-8">
       <div className="py-5 pb-0 flex justify-between items-center">
         <img
