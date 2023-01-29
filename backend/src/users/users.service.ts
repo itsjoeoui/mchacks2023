@@ -26,9 +26,9 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  async findAll() {
-    return await this.usersRepository.find();
-  }
+  // async findAll() {
+  //   return await this.usersRepository.find();
+  // }
 
   async findOne(id: number) {
     return await this.usersRepository.find({
@@ -63,16 +63,16 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  async remove(id: number) {
-    const user = await this.usersRepository.findOneBy({
-      id: id,
-    });
+  // async remove(id: number) {
+  //   const user = await this.usersRepository.findOneBy({
+  //     id: id,
+  //   });
 
-    if (!user) {
-      throw new NotFoundException(id);
-    }
+  //   if (!user) {
+  //     throw new NotFoundException(id);
+  //   }
 
-    await this.usersRepository.delete(user);
-    return true;
-  }
+  //   await this.usersRepository.delete(user);
+  //   return true;
+  // }
 }
