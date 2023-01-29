@@ -30,6 +30,7 @@ export type Config = {
   maxExp : number;
   items : Item[]
 }
+
 axios.defaults.baseURL = "https://bp.augustera.me/";
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -63,7 +64,7 @@ const User = {
 };
 
 const Config = {
-  details: () => request.get<User>("/config"),
+  details: () => request.get<Config>("/config"),
   create: (data: Config) => request.post<Config>("/config", data),
 };
 

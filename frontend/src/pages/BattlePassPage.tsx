@@ -12,6 +12,11 @@ export default function BattlePassPage() {
     const [config, setConfig] = useState<Config>();
 
     useEffect(() => {
+
+        UserService.Config.details().then((data) => {
+            setConfig(data)
+        })
+
         UserService.User.details().then( (data) => {
             setUser(data)
         })
@@ -20,9 +25,7 @@ export default function BattlePassPage() {
             setBp(data)
         })
 
-        UserService.Config.details().then((data) => {
-            setConfig(data)
-        })
+
     }, [])
 
   return (
