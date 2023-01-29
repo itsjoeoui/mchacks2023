@@ -22,8 +22,11 @@ export class InventoryService {
     return await this.inventoryRepository.find({ relations: ['items'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} inventory`;
+  async findOne(id: number) {
+    return await this.inventoryRepository.findOne({
+      where: { id },
+      relations: ['items'],
+    });
   }
 
   update(id: number, updateInventoryDto: UpdateInventoryDto) {
