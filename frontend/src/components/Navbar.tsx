@@ -33,10 +33,10 @@ export default function Navbar() {
       </div>
 
       <nav className="flex justify-end gap-4 flex-row py-1 text-xl">
-        <Link to="/restaurants" className="hover:opacity-70">
+        <Link to="/" className="hover:opacity-70">
           Restaurants
         </Link>
-        <Link to="/" className="hover:opacity-70">
+        <Link to="/bp" className="hover:opacity-70">
           Battle Pass
         </Link>
       </nav>

@@ -6,8 +6,8 @@ import RestaurantsPage from "./pages/RestaurantsPage";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<BattlePassPage />} />
-      <Route path="/restaurants" element={<RestaurantsPage />} />
+      <Route path="/bp" element={<BattlePassPage />} />
+      <Route path="/" element={<RestaurantsPage />} />
       <Route path="/restaurant/:id" element={<RestaurantPage />} />
     </Routes>
   );
