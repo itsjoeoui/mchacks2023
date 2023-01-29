@@ -9,9 +9,4 @@ export class AppController {
   fillDb() {
     return this.appService.fillDb();
   }
-
-  @Post('order')
-  order(@Param('userId') userId: number, @Param('orderId') orderId: number) {
-    return this.appService.order(userId, orderId);
-  }
 }

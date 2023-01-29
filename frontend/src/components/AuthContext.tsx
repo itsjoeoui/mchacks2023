@@ -8,7 +8,7 @@ export const useAuth = () => React.useContext(authContext);
 export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = React.useState<User>();
   useEffect(() => {
-    UserService.User.details(16).then((data) => {
+    UserService.User.details(1).then((data) => {
       setUser(data);
     });
   }, []);
