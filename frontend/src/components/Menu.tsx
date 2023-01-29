@@ -12,7 +12,7 @@ export default function Menu() {
   const [user, setUser] = useState<User>();
 
   const handleClick = () => {
-      navigate('/')
+      navigate('/restaurants')
   }
 
   useEffect(() => {
