@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import BattlePassPage from "./pages/BattlePassPage";
+import RestaurantPage from "./pages/RestaurantPage";
 import RestaurantsPage from "./pages/RestaurantsPage";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <Routes>
       <Route path="/" element={<BattlePassPage />} />
       <Route path="/restaurants" element={<RestaurantsPage />} />
+      <Route path="/restaurant/:id" element={<RestaurantPage />} />
     </Routes>
   );
 }
