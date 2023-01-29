@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import UserService from "./UserService";
 import { User } from "./UserService";
-import { FiUser, FiDollarSign, FiMenu } from "react-icons/fi";
+import { FiUser, FiDollarSign, FiMenu, FiCoffee, FiStar, FiKey,} from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
@@ -45,12 +45,17 @@ export default function Navbar() {
       {menuOpen ? (
         <nav className="flex flex-col text-xl absolute right-8 bg-white border border-black rounded z-50">
           {[
-            { name: "Restaurants", to: "/" },
-            { name: "Battle Pass", to: "/battle-pass" },
-            { name: "Redeem", to: "/redeem" },
+            { name: "Restaurants", to: "/", logo:<FiCoffee strokeWidth={1} size={25} />},
+            { name: "Battle Pass", to: "/battle-pass", logo:<FiStar strokeWidth={1} size={25} />},
+            { name: "Redeem", to: "/redeem", logo:<FiKey strokeWidth={1} size={25} />},
           ].map((entry, i) => (
             <Link to={entry.to} key={i} className="hover:opacity-70 px-4 py-2">
-              {entry.name}
+              <div className="flex flex-row">
+                <div className="pr-4">
+                  {entry.logo}
+                </div>
+                {entry.name}
+              </div>
             </Link>
           ))}
         </nav>
