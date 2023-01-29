@@ -27,15 +27,22 @@ export default function BattlePassPage() {
 
 
     }, [])
+    let content;
+    if (!bp || !user || !config){
+        content = <div>Loading...</div>;
+    }
+    else{
+        content = (<><div className="flex items-center justify-center w-full mb-6">
+            <BattlePass userExp={bp.xp} totalExp={config.maxExp} />
+        </div>
+        <div className="flex justify-center md:w-3/5 mx-auto">
+            <Challenges />
+        </div></>);
+    }
 
   return (
     <Layout>
-      <div className="flex items-center justify-center w-full mb-6">
-        <BattlePass userExp={bp?.xp} totalExp={config?.maxExp} />
-      </div>
-      <div className="flex justify-center md:w-3/5 mx-auto">
-        <Challenges />
-      </div>
+        {content}
     </Layout>
   );
 }
