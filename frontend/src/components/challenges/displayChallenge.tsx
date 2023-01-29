@@ -1,11 +1,14 @@
 import React from "react";
 import { Challenge } from "../UserService";
-
+import { FiCheckSquare, FiSquare} from "react-icons/fi"
 type ChallengeProps = {
   challenge: Challenge;
 };
 
 export default function DisplayChallenge({ challenge }: ChallengeProps) {
+    let icon = <FiSquare size={10} />;
+    if(challenge.completed == true)
+        icon = <FiCheckSquare size={10} />;
   return (
     <div className="border-black flex-1 p-5 border-b last:border-b-0">
       <div className="flex justify-between mb-2">
