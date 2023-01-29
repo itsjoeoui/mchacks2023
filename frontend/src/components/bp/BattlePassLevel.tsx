@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiTag, FiCheckCircle} from "react-icons/fi";
+import { FiTag, FiCheckCircle } from "react-icons/fi";
 import { FaCoins, FaHamburger } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
@@ -45,10 +45,11 @@ export default function BattlePassLevel({
   return (
     <div className="relative overflow">
       <div
-        className="border border-black bg-white text-xs md:text-sm w-32 md:w-36 z-10 p-2 h-12 md:h-16 absolute top-[-12px] left-16 lg:left-24 pointer-events-none"
+        className="border border-black bg-white text-xs md:text-sm w-32 md:w-36 z-10 p-2 text-center absolute top-[50%] left-16 lg:left-24 pointer-events-none"
         style={{
           opacity: showTooltip ? 200 : 0,
           transitionDuration: "300ms",
+          transform: "translate(0, -50%)",
         }}
       >
         {item.name}

@@ -45,7 +45,7 @@ export type OrderItem = {
   menuId: number;
 };
 
-axios.defaults.baseURL = "http://localhost:3000"; // NOTE: FIX CORS
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL || "http://localhost:3000"; // NOTE: FIX CORS
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {

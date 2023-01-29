@@ -58,14 +58,13 @@ export default function RestaurantPage() {
               <div className="">
                 {orders.map((item) => (
                   <div>
-                    <span>
-                      <h3>{item.name}</h3>
-                    </span>
+                    <h3>{item.name}</h3>
                   </div>
                 ))}
               </div>
 
               <button
+                className="mt-4 rounded bg-black w-full text-white p-2 font-bold"
                 onClick={() => UserService.Menu.order(auth as User, orders)}
               >
                 Order
