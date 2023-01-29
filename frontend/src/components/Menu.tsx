@@ -11,6 +11,7 @@ export default function Menu() {
       setUser(data)
     })
   })
+
   return (
     <div className="mb-8 mt-4">
       <div className="px-8 py-3 border-y border-black flex justify-between items-center">
