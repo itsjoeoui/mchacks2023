@@ -37,7 +37,7 @@ export class UsersController {
   }
 
   @Post('makeOrder')
-  makeOrder(@Query('id') id: string, @Query('menuIds') menuIds: number[]) {
+  makeOrder(@Query('id') id: string, @Body() menuIds: number[]) {
     return this.usersService.makeOrder(+id, menuIds);
   }
 
