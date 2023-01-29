@@ -73,6 +73,7 @@ const Bp = {
 };
 
 const User = {
+  list: () => request.get<User[]>("/users"),
   details: (id: number) => request.get<User>(`/users/${id}`),
   create: (data: User) => request.post<User>("/users", data),
 };
@@ -83,9 +84,9 @@ const Config = {
 };
 
 const Menu = {
-  order: (data: OrderItem[]) =>
+  order: (user: User, data: OrderItem[]) =>
     request.post(
-      "/users/makeOrder",
+      `/users/makeOrder?id=${user.id}`,
       data.map((_) => _.menuId)
     ),
 };
