@@ -5,7 +5,7 @@ type ChallengeProps = {
   xp?: number;
 };
 
-export default function Challenge({ description, xp }: ChallengeProps) {
+export default function DisplayChallenge({ description, xp }: ChallengeProps) {
   return (
     <div className="border-black flex-1 p-5 border-b last:border-b-0">
       <div className="flex justify-between mb-2">

@@ -1,6 +1,7 @@
 import Menu from "./components/Menu";
 import BattlePass from "./components/bp/BattlePass";
 import ChallengeContainer from "./components/challenges/ChallengeContainer";
+import ApiIntegration from "./components/apiIntegration";
 
 function App() {
   return (

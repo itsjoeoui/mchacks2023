@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// import { CreateBpDto } from './dto/create-bp.dto';
 import { UpdateBpDto } from './dto/update-bp.dto';
 import { Bp } from './entities/bp.entity';
 
@@ -12,16 +11,12 @@ export class BpService {
     private pbRepository: Repository<Bp>,
   ) {}
 
-  // create(createBpDto: CreateBpDto) {
-  //   return 'This action adds a new bp';
-  // }
-
-  findAll() {
-    return this.pbRepository.find();
+  async findAll() {
+    return await this.pbRepository.find();
   }
 
-  findOne(id: number) {
-    return this.pbRepository.findOneBy({ id: id });
+  async findOne(id: number) {
+    return await this.pbRepository.findOneBy({ id: id });
   }
 
   async update(id: number, updateBpDto: UpdateBpDto) {
@@ -30,7 +25,16 @@ export class BpService {
     return await this.pbRepository.save(bp);
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} bp`;
-  // }
+  async remove(id: number) {
+    const user = await this.pbRepository.findOneBy({
+      id: id,
+    });
+
+    if (!user) {
+      throw new NotFoundException(id);
+    }
+
+    await this.pbRepository.delete(user);
+    return true;
+  }
 }
