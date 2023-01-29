@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import UserService, { OrderItem, User } from "../components/UserService";
 import { useAuth } from "../components/AuthContext";
-import {FiPlus} from "react-icons/all";
-
+import { FiPlus } from "react-icons/all";
 
 export default function RestaurantPage() {
   let { id } = useParams();
@@ -38,7 +37,8 @@ export default function RestaurantPage() {
                   rerum.
                 </p>
 
-                <FiPlus size={30}
+                <FiPlus
+                  size={30}
                   className="float-right mt-4"
                   onClick={() =>
                     setOrders([
@@ -65,7 +65,10 @@ export default function RestaurantPage() {
 
               <button
                 className="mt-4 rounded bg-black w-full text-white p-2 font-bold"
-                onClick={() => UserService.Menu.order(auth as User, orders)}
+                onClick={async () => {
+                  await UserService.Menu.order(auth as User, orders);
+                  location.pathname = "/";
+                }}
               >
                 Order
               </button>
