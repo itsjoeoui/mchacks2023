@@ -21,13 +21,18 @@ export type User = {
   password: string;
   coin: number;
   bp: Bp;
-  inventory: Inventory;
+  inventory: {id: number};
   challenges: Challenge[];
+};
+export type InventoryItem = {
+  id: number;
+  name: string;
+  rewardType: RewardType;
 };
 
 export type Inventory = {
-  name: string;
-  itemType: string;
+  id: string;
+  items: InventoryItem[];
 };
 
 export type Item = {
@@ -43,6 +48,12 @@ export type Config = {
 export type OrderItem = {
   name: string;
   menuId: number;
+};
+
+export enum RewardType {
+  Coupon,
+  Food,
+  Coin,
 };
 
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL || "http://localhost:3000"; // NOTE: FIX CORS
@@ -61,10 +72,10 @@ const Challenges = {
 };
 
 const Inventory = {
-  list: () => request.get<Inventory[]>("/inventory"),
+  // list: () => request.get<Inventory>("/inventory"),
   details: (id: number) => request.get<Inventory>(`/inventory/${id}`),
-  create: (data: Inventory) => request.post<Inventory>("/inventory", data),
-  send: (id: number) => request.post<number>("/placeholder", id),
+  // create: (data: Inventory) => request.post<Inventory>("/inventory", data),
+  // send: (id: number) => request.post<number>("/placeholder", id),
 };
 
 const Bp = {

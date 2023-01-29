@@ -3,19 +3,13 @@ import { FiTag, FiCheckCircle } from "react-icons/fi";
 import { FaCoins, FaHamburger } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { Item } from "../UserService";
+import { Item, RewardType } from "../UserService";
 
 type BattlePassLevelProps = {
   level: number;
   item: Item;
   completed: boolean;
 };
-
-enum RewardType {
-  Coupon,
-  Food,
-  Coin,
-}
 
 export default function BattlePassLevel({
   level,
