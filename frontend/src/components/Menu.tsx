@@ -23,8 +23,12 @@ export default function Menu() {
         </div>
       </div>
       <nav className="flex justify-evenly items-center border-b border-black py-1">
-        <Link to="/restaurants">Restaurants</Link>
-        <Link to="/">Battle Pass</Link>
+        <Link to="/restaurants" className="hover:opacity-70">
+          Restaurants
+        </Link>
+        <Link to="/" className="hover:opacity-70">
+          Battle Pass
+        </Link>
       </nav>
     </div>
   );
