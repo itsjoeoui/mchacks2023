@@ -59,8 +59,8 @@ const Bp = {
 };
 
 const User = {
-  details: () => request.get<User>("/user"),
-  create: (data: User) => request.post<User>("/user", data),
+  details: () => request.get<User>("/users"),
+  create: (data: User) => request.post<User>("/users", data),
 };
 
 const Config = {
