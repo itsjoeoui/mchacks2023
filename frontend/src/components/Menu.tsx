@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import UserService from "./UserService";
 import {User} from "./UserService"
 import { FiUser, FiDollarSign } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   const [user, setUser] = useState<User>()
@@ -21,6 +22,8 @@ export default function Menu() {
           className="w-[150px] h-fit"
         />
 
+        <button>Order</button>
+
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <FiUser size={30} strokeWidth={1} />
@@ -33,8 +36,12 @@ export default function Menu() {
         </div>
       </div>
       <nav className="flex justify-evenly items-center border-b border-black py-1">
-        <a>Restaurants</a>
-        <a>Battle Pass</a>
+        <Link to="/restaurants" className="hover:opacity-70">
+          Restaurants
+        </Link>
+        <Link to="/" className="hover:opacity-70">
+          Battle Pass
+        </Link>
       </nav>
     </div>
   );
