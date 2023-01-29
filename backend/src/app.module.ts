@@ -7,6 +7,7 @@ import { BpModule } from './bp/bp.module';
 import { ChallengeModule } from './challenge/challenge.module';
 import { ConfigModule } from './config/config.module';
 import { ItemsModule } from './items/items.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ItemsModule } from './items/items.module';
     ChallengeModule,
     ConfigModule,
     ItemsModule,
+    InventoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,10 +12,10 @@ export class ChallengeController {
   //   return this.challengeService.create(createChallengeDto);
   // }
 
-  @Get()
-  findAll() {
-    return this.challengeService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.challengeService.findAll();
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
