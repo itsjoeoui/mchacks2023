@@ -8,7 +8,7 @@ export default function ProgressBar({ progress }: ProgressBarProps) {
       <div
         className="h-full"
         style={{
-          width: `${progress}px`,
+          width: `${progress}%`,
           backgroundImage:
             "radial-gradient(#212121 20%, transparent 20%), radial-gradient(#212121 20%, transparent 20%)",
           backgroundColor: "#ffffff",

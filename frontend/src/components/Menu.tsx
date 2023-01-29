@@ -1,17 +1,13 @@
-import React from 'react';
-import {useState, useEffect} from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import UserService from "./UserService";
-import {User} from "./UserService"
+import { User } from "./UserService";
 import { FiUser, FiDollarSign } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 export default function Menu() {
-  const [user, setUser] = useState<User>()
-  useEffect(() => {
-    UserService.User.details().then((data) => {
-      setUser(data)
-    })
-  })
+  const user = useAuth();
 
   return (
     <div className="mb-8 px-8">
