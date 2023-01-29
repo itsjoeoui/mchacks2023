@@ -32,7 +32,7 @@ export const CHALLENGE: Partial<CreateChallengeDto>[] = [
   {
     name: 'Thai Express',
     description: 'Order a General Thai Chicken with Cauliflower Rice',
-    exp: 302,
+    exp: 2500,
     menuId: 3,
   },
 ];

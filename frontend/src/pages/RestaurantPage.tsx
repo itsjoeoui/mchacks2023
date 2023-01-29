@@ -1,8 +1,10 @@
 import Layout from "../Layout";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import UserService, { OrderItem, User } from "../components/UserService";
 import { useAuth } from "../components/AuthContext";
+import {FiPlus} from "react-icons/all";
+
 
 export default function RestaurantPage() {
   let { id } = useParams();
@@ -36,7 +38,7 @@ export default function RestaurantPage() {
                   rerum.
                 </p>
 
-                <button
+                <FiPlus size={30}
                   className="float-right mt-4"
                   onClick={() =>
                     setOrders([
@@ -44,9 +46,7 @@ export default function RestaurantPage() {
                       { name: title, menuId: i + 1 },
                     ])
                   }
-                >
-                  Add to Order
-                </button>
+                />
               </div>
             ))}
           </div>
