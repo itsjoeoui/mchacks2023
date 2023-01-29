@@ -37,8 +37,8 @@ export class UsersController {
   }
 
   @Post('makeOrder')
-  makeOrder(@Query('id') id: string, @Query('menuId') menuId: string) {
-    return this.usersService.makeOrder(+id, +menuId);
+  makeOrder(@Query('id') id: string, @Query('menuIds') menuIds: number[]) {
+    return this.usersService.makeOrder(+id, menuIds);
   }
 
   // @Delete(':id')

@@ -91,7 +91,7 @@ export class UsersService {
     return await this.usersRepository.save(user);
   }
 
-  async makeOrder(id: number, menuId: number) {
+  async makeOrder(id: number, menuIds: number[]) {
     const user = await this.usersRepository.findOne({
       where: {
         id,
@@ -106,7 +106,7 @@ export class UsersService {
     const curLevel = Math.floor(user.bp.exp / 1000);
     user.bp.exp += 100;
     for (const challenge of user.challenges) {
-      if (challenge.menuId === menuId) {
+      if (menuIds.find((id) => id === challenge.menuId)) {
         const dto = new UpdateChallengeDto();
         dto.completed = true;
         user.bp.exp += challenge.exp;
