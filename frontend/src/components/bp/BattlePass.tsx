@@ -3,10 +3,12 @@ import BattlePassLevel from "./BattlePassLevel";
 import ProgressBar from "./ProgressBar";
 import ScrollContainer from "react-indiana-drag-scroll";
 import { ScrollContainerProps } from "react-indiana-drag-scroll";
+import { Config } from "../UserService";
 
 type BattlePassProps = {
   userExp: number;
   totalExp: number;
+  config: Config;
 };
 function getLeft(focus: number) {
   const windowWidth = window.innerWidth;
@@ -14,13 +16,16 @@ function getLeft(focus: number) {
   return (focus + 2) * gapSize;
 }
 
-export default function BattlePass({ userExp, totalExp }: BattlePassProps) {
+const EXP_PER_LEVEL = 500;
+
+export default function BattlePass({
+  userExp,
+  totalExp,
+  config,
+}: BattlePassProps) {
   const ref: any = useRef<ScrollContainer>(null);
-  const level = 13;
-  const levels = Array(13).fill(true).concat(Array(12).fill(false));
+  const level = Math.floor(userExp / EXP_PER_LEVEL);
   useEffect(() => {
-    // const windowWidth = window.innerWidth;
-    // const gapSize = windowWidth < 768 ? 96 : 192;
     ref.current?.getElement().scrollTo({
       left: getLeft(level),
     });
@@ -33,8 +38,13 @@ export default function BattlePass({ userExp, totalExp }: BattlePassProps) {
       <div className="relative w-[412rem] mb-[26px] mt-16 lg:mb-[55px]">
         <ProgressBar progress={fillPercent} />
         <div className="flex gap-24 md:gap-48 items-center absolute top-1/2 transform -translate-y-1/2 w-full">
-          {levels.map((x, i) => (
-            <BattlePassLevel key={i} level={i + 1} completed={x} />
+          {config.items.map((item, i) => (
+            <BattlePassLevel
+              key={i}
+              level={i + 1}
+              item={item}
+              completed={i < level}
+            />
           ))}
         </div>
       </div>

@@ -1,22 +1,23 @@
 import React from "react";
+import { Challenge } from "../UserService";
 
 type ChallengeProps = {
-  description: string;
-  xp?: number;
+  challenge: Challenge;
 };
 
-export default function DisplayChallenge({ description, xp }: ChallengeProps) {
+export default function DisplayChallenge({ challenge }: ChallengeProps) {
   return (
     <div className="border-black flex-1 p-5 border-b last:border-b-0">
       <div className="flex justify-between mb-2">
-        <div className="text-lg">{description}</div>
-        <div className="font-bold">{xp}xp</div>
+        <div className="text-lg">{challenge.name}</div>
+        <div className="font-bold">{challenge.exp}xp</div>
       </div>
 
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ex
+        {challenge.description}
+        {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur ex
         cumque voluptate eligendi unde beatae nesciunt laborum harum rem
-        similique quo sed nisi quae amet reiciendis eos, odio culpa natus?
+        similique quo sed nisi quae amet reiciendis eos, odio culpa natus? */}
       </p>
     </div>
   );
