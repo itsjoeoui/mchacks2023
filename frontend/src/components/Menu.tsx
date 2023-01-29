@@ -7,14 +7,14 @@ import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Menu() {
-  const auth= useAuth();
-  const [user, setUser] = useState<User>()
+  const auth = useAuth();
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    UserService.User.details(3).then((data) => {
-      setUser(data)
-    })
-  }, [])
+    UserService.User.details(1).then((data) => {
+      setUser(data);
+    });
+  }, []);
   return (
     <div className="mb-8 px-8">
       <div className="py-5 pb-0 flex justify-between items-center">
