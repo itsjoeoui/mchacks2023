@@ -15,6 +15,9 @@ export type Bp = {
 
 export type User = {
   id: number;
+  bp: Bp;
+  inventory: Inventory;
+  challenges: Challenge[];
 };
 
 export type Inventory = {
@@ -60,7 +63,7 @@ const Bp = {
 };
 
 const User = {
-  details: () => request.get<User>("/users"),
+  details: (id: number) => request.get<User>(`/users/${id}`),
   create: (data: User) => request.post<User>("/users", data),
 };
 
