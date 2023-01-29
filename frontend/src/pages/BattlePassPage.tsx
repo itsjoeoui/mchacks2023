@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import UserService, { Bp, User, Config } from "../components/UserService";
 import BattlePass from "../components/bp/BattlePass";
 import Challenges from "../components/challenges/Challenges";
-import Menu from "../components/Menu";
+import Navbar from "../components/Navbar";
 import Layout from "../Layout";
 import { useAuth } from "../components/AuthContext";
 

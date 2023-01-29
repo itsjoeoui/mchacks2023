@@ -43,9 +43,9 @@ export type Config = {
 export type OrderItem = {
   name: string;
   menuId: number;
-}
+};
 
-axios.defaults.baseURL = "https://bp.augustera.me"; // NOTE: FIX CORS
+axios.defaults.baseURL = "http://localhost:3000"; // NOTE: FIX CORS
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
@@ -83,7 +83,11 @@ const Config = {
 };
 
 const Menu = {
-  order: (data: OrderItem[]) => request.post("/users/makeOrder", data.map((_) => _.menuId)),
-}
+  order: (data: OrderItem[]) =>
+    request.post(
+      "/users/makeOrder",
+      data.map((_) => _.menuId)
+    ),
+};
 
 export default { Challenges, Inventory, Bp, User, Config, Menu };

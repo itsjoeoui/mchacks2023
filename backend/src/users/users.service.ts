@@ -23,6 +23,8 @@ export class UsersService {
     private usersRepository: Repository<User>,
     @InjectRepository(Challenge)
     private challengeRepository: Repository<Challenge>,
+    @InjectRepository(Inventory)
+    private inventoryRepository: Repository<Inventory>,
     private challengeService: ChallengeService,
     private itemsService: ItemsService,
   ) {}
@@ -30,6 +32,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const bp = new Bp();
     const inventory = new Inventory();
+    inventory.items = [];
     const user = new User();
     user.email = createUserDto.email;
     user.name = createUserDto.name;
@@ -99,28 +102,44 @@ export class UsersService {
       relations: ['bp', 'challenges', 'inventory'],
     });
 
+    const inventory = await this.inventoryRepository.findOne({
+      where: {
+        id: user.inventory.id,
+      },
+      relations: ['items'],
+    });
+
     if (!user) {
       throw new NotFoundException(id);
     }
 
     const curLevel = Math.floor(user.bp.exp / 1000);
     user.bp.exp += 100;
-    for (const challenge of user.challenges) {
-      if (menuIds.find((id) => id === challenge.menuId)) {
+    for (let i = 0; i < user.challenges.length; i++) {
+      const challenge = user.challenges[i];
+      if (
+        menuIds.find((id) => id === challenge.menuId && !challenge.completed)
+      ) {
         const dto = new UpdateChallengeDto();
         dto.completed = true;
         user.bp.exp += challenge.exp;
-        await this.challengeService.update(challenge.id, dto);
+        user.challenges[i] = await this.challengeService.update(
+          challenge.id,
+          dto,
+        );
       }
     }
+
     const newLevel = Math.floor(user.bp.exp / 1000);
+
     for (let i = curLevel; i < newLevel; i++) {
       const dto = new CreateItemDto();
       dto.name = config.items[i].name;
       dto.rewardType = config.items[i].rewardType;
-      dto.inventory = user.inventory;
-      await this.itemsService.create(dto);
+      dto.inventory = inventory;
+      inventory.items.push(await this.itemsService.create(dto));
     }
+
     return await this.usersRepository.save(user);
   }
 

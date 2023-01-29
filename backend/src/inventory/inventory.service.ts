@@ -18,8 +18,8 @@ export class InventoryService {
     return await this.inventoryRepository.save(inventory);
   }
 
-  findAll() {
-    return `This action returns all inventory`;
+  async findAll() {
+    return await this.inventoryRepository.find({ relations: ['items'] });
   }
 
   findOne(id: number) {

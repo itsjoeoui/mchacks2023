@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./components/Menu";
+import Navbar from "./components/Navbar";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div>
-      <Menu />
+      <Navbar />
       <main className="px-8">{children}</main>
     </div>
   );
