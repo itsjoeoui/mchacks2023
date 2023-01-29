@@ -3,7 +3,7 @@ import UserService, { Bp, Challenge, User } from "../UserService";
 import { useEffect, useState } from "react";
 
 export default function Challenges() {
-  const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [challenges, setChallenges] = useState<Challenge[]>();
   const [bp, setBp] = useState<Bp>();
   const [user, setUser] = useState<User>();
 
@@ -18,6 +18,11 @@ export default function Challenges() {
       setUser(data);
     });
   }, []);
+
+  if (!challenges) {
+    return <div>Loading...</div>;
+  }
+  console.log(challenges);
 
   return (
     <div>

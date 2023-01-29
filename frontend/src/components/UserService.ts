@@ -20,8 +20,8 @@ export type User = {
 export type Inventory = {
   name: string;
   itemType: string;
-}
-axios.defaults.baseURL = "https://bp.augustera.me/";
+};
+axios.defaults.baseURL = "http://localhost:3000"; // NOTE: FIX CORS
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
@@ -38,8 +38,8 @@ const Challenges = {
 
 const Inventory = {
   details: () => request.get<Inventory>("/inventory"),
-  create: (data: Inventory) => request.post<Inventory>("/Inventory", data)
-}
+  create: (data: Inventory) => request.post<Inventory>("/Inventory", data),
+};
 
 const Bp = {
   details: () => request.get<Bp>("/bp"),
@@ -51,4 +51,8 @@ const User = {
   create: (data: User) => request.post<User>("/user", data),
 };
 
-export default { Challenges, Bp, User };
+const Populate = {
+  fillDb: () => request.post("/", {}),
+};
+
+export default { Challenges, Bp, User, Populate };

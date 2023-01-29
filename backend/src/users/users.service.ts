@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ChallengeService } from '@shared/challenge/challenge.service';
+import { CreateChallengeDto } from '@shared/challenge/dto/create-challenge.dto';
 import { Inventory } from '@shared/inventory/entities/inventory.entity';
 import { BpService } from 'src/bp/bp.service';
 import { Bp } from 'src/bp/entities/bp.entity';
@@ -7,6 +9,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { CHALLENGE } from '@shared/app.service';
 BpService;
 
 @Injectable()
@@ -14,6 +17,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private challengeService: ChallengeService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -26,12 +30,22 @@ export class UsersService {
     user.bp = bp;
     user.inventory = inventory;
 
+    const challenges = [];
+    for (const challengeDto of CHALLENGE) {
+      challengeDto.user = user;
+      const challenge = await this.challengeService.create(
+        challengeDto as CreateChallengeDto,
+      );
+      challenges.push(challenge);
+    }
+    user.challenges = challenges;
+
     return await this.usersRepository.save(user);
   }
 
-  // async findAll() {
-  //   return await this.usersRepository.find();
-  // }
+  async findAll() {
+    return await this.usersRepository.find();
+  }
 
   async findOne(id: number) {
     return await this.usersRepository.findOne({
